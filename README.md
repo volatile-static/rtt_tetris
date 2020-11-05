@@ -1,6 +1,75 @@
 # rtt-tetris
+
 用FinSH玩的俄罗斯方块。
 
-需要用到[vt100](https://github.com/wuhanstudio/vt100)软件包。
+## 简介
 
-![pic](docs/tetris.png)
+将[跨平台俄罗斯方块](https://github.com/volatile-static/CrossPlatformTetris)移植到RT-Thread，可以通过PuTTY或XShell游玩。
+
+![pic](tetris.png)
+
+## API
+
+```shell
+Tetris.c
+Tetris.h
+```
+
+这两个文件是从[跨平台俄罗斯方块](https://github.com/volatile-static/CrossPlatformTetris)复制过来的。总共只有6个函数接口：
+
+```c
+void NewGame(TCmd *Messenger);
+void MoveLeft(TCmd *Messenger);
+void MoveRight(TCmd *Messenger);
+bool MoveDown(TCmd *Messenger);
+void Transform(TCmd *Messenger);
+bool GameOver(void);
+```
+
+每个函数的输出都是一个TCmd结构体，记录了发生变动的方块的坐标。
+
+## 食用方式
+
+![img](menuconfig.png)
+
+勾选**vt100**和**Tetris**后编译并下载，在msh输入 ``` tetris_demo ``` 即可。
+若要改变游戏速度，可以在命令后跟上方块下落的时间间隔，如：
+
+```shell
+
+msh >tetris_demo 200
+
+```
+
+表示俄罗斯方块每200毫秒下落一格。
+
+- 在```tetris_demo.c```中有以下宏定义，可以自行修改键位：
+
+```cpp
+#define KEY_UP    ('w')
+#define KEY_LEFT  ('a')
+#define KEY_DOWN  ('s')
+#define KEY_RIGHT ('d')
+```
+
+- 在```Tetris.h```中可以修改画布尺寸：
+
+```cpp
+// Horizon
+#define SizeX 24
+// Vertial
+#define SizeY 32
+```
+
+## 依赖
+
+需要用到[vt100](https://github.com/wuhanstudio/vt100)软件包。
+> 本程序可以在任何支持FinSH（msh）的设备上运行。
+
+## TODO
+
+目前每次下落只能左右移动一格，计划采用多线程实现。
+
+## 联系方式
+
+- QQ：1043064987

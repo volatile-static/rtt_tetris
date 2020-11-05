@@ -9,12 +9,14 @@
 #define KEY_DOWN  ('s')
 #define KEY_RIGHT ('d')
 
-static void update(TCmd* cmd, int color) {
+static void update(TCmd* cmd, int color) {  // 每次有方块变化都要更新显示
+	// 先把原先位置擦除
 	vt_set_bg_color(VT_B_WHITE);
 	for (int i = 0; i < cmd->cnt[0]; ++i)
 		vt_draw_char_at(cmd->Erase[i].Y + 2, cmd->Erase[i].X + 2, ' ');
-	fflush(NULL);
+	fflush(NULL);  // 刷新缓冲区
 
+	// 再画上新的
 	vt_set_bg_color(color);
 	for (int i = 0; i < cmd->cnt[1]; ++i)
 		vt_draw_char_at(cmd->Paint[i].Y + 2, cmd->Paint[i].X + 2, ' ');
@@ -22,7 +24,7 @@ static void update(TCmd* cmd, int color) {
 }
 
 static void key_action(const rt_device_t con, TCmd* cmd, int color) {
-	char key;
+	char key;  // 从FinSH控制台读一个字符
 	if (rt_device_read(con, -1, &key, 1) > 0) {
 		switch (key) {
 		case KEY_UP:
@@ -59,7 +61,7 @@ static void init_ui(void) {
 
 static void tetris_demo(int argc, char* argv[]) {
 	const rt_device_t console = rt_device_find(RT_CONSOLE_DEVICE_NAME); // "uart0"
-	const int fall_period_ms = (argc > 1 ? atoi(argv[1]) : 500);
+	const int fall_period_ms = (argc > 1 ? atoi(argv[1]) : 500);  // 多少毫秒下降一格
 	int active_color = new_color();
 	TCmd tetris_cmd;
 

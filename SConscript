@@ -1,16 +1,9 @@
-# RT-Thread building script for bridge
-
-import os
 from building import *
 
-cwd = GetCurrentDir()
-objs = []
-list = os.listdir(cwd)
+cwd     = GetCurrentDir()
+src     = Glob('*.c')
+CPPPATH = [cwd]
 
-if GetDepend('PKG_USING_TETRIS'):
-    for d in list:
-        path = os.path.join(cwd, d)
-        if os.path.isfile(os.path.join(path, 'SConscript')):
-            objs = objs + SConscript(os.path.join(d, 'SConscript'))
+group = DefineGroup('Tetris', src, depend = ['PKG_USING_TETRIS'], CPPPATH = CPPPATH)
 
-Return('objs')
+Return('group')
