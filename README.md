@@ -30,15 +30,29 @@ bool GameOver(void);
 
 ## 食用方式
 
-![img](menuconfig.png)
+在ENV工具的配置方法：
 
-勾选**vt100**和**Tetris**后编译并下载，在msh输入 ``` tetris_demo ``` 即可。
+```
+ RT-Thread online packages  --->
+    miscellaneous packages  --->
+        games: games run on RT-Thread console  --->
+            [*] Tetris: An indie puzzle video game run on RT-Thread console
+```
+
+在终端下键入：
+
+```shell
+msh> tetris_demo
+```
+
+即可运行。
+
+
+
 若要改变游戏速度，可以在命令后跟上方块下落的时间间隔，如：
 
 ```shell
-
 msh >tetris_demo 200
-
 ```
 
 表示俄罗斯方块每200毫秒下落一格。
@@ -61,10 +75,7 @@ msh >tetris_demo 200
 #define SizeY 32
 ```
 
-## 依赖
 
-需要用到[vt100](https://github.com/wuhanstudio/vt100)软件包。
-> 本程序可以在任何支持FinSH（msh）的设备上运行。
 
 ## TODO
 
