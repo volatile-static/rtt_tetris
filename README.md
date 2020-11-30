@@ -34,9 +34,9 @@ bool GameOver(void);
 
 ```
  RT-Thread online packages  --->
- 	miscellaneous packages  --->
-		games: games run on RT-Thread console  --->
-        	[*] Tetris: An indie puzzle video game run on RT-Thread console
+    miscellaneous packages  --->
+        games: games run on RT-Thread console  --->
+            [*] Tetris: An indie puzzle video game run on RT-Thread console
 ```
 
 在终端下键入：
